@@ -15,3 +15,8 @@ export const toggleTodo = (id: string): TodosAction => ({
   type: TodosActionTypes.TOGGLE_TODO,
   payload: id,
 });
+
+export const deleteTodo = (id: string): TodosAction => ({
+  type: TodosActionTypes.DELETE_TODO,
+  payload: id,
+});

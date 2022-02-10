@@ -20,6 +20,11 @@ export default function todosReducer(
       return state.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo));
     }
 
+    case TodosActionTypes.DELETE_TODO: {
+      const id = action.payload;
+      return state.filter((todo) => todo.id !== id);
+    }
+
     default: {
       return state;
     }
