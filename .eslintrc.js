@@ -21,6 +21,9 @@ module.exports = {
     'import/no-unresolved': [0],
     'import/extensions': [0, { ts: 'never', tsx: 'never' }],
     'react/react-in-jsx-scope': [0],
+    'no-use-before-define': [2, { variables: false }],
+    'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
+    quotes: [1, 'single'],
   },
   settings: {
     'import/resolver': {
