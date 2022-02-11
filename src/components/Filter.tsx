@@ -1,14 +1,16 @@
 import type { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
-import { useAppDispatch } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import VisibilityFilters from '@/redux/filter/utils';
 import { setFilter } from '@/redux/filter/actions';
+import { getFilterState } from '@/redux/filter/selectors';
 
 const Filter: FunctionComponent = () => {
   const dispatch = useAppDispatch();
+  const actualFilter = useAppSelector(getFilterState);
 
-  const setAllTodosFilter = () => dispatch(setFilter(VisibilityFilters.ALL));
+  const setAllTodos = () => dispatch(setFilter(VisibilityFilters.ALL));
   const setActiveTodos = () => dispatch(setFilter(VisibilityFilters.ACTIVE));
   const setCompletedTodos = () => dispatch(setFilter(VisibilityFilters.COMPLETED));
 
@@ -18,7 +20,8 @@ const Filter: FunctionComponent = () => {
         <FilterButton
           type="button"
           aria-label="filter all todos"
-          onClick={setAllTodosFilter}
+          onClick={setAllTodos}
+          active={actualFilter === VisibilityFilters.ALL}
         >
           All
         </FilterButton>
@@ -26,6 +29,7 @@ const Filter: FunctionComponent = () => {
           type="button"
           aria-label="filter active todos"
           onClick={setActiveTodos}
+          active={actualFilter === VisibilityFilters.ACTIVE}
         >
           Active
         </FilterButton>
@@ -33,6 +37,7 @@ const Filter: FunctionComponent = () => {
           type="button"
           aria-label="filter completed todos"
           onClick={setCompletedTodos}
+          active={actualFilter === VisibilityFilters.COMPLETED}
         >
           Completed
         </FilterButton>
@@ -40,6 +45,10 @@ const Filter: FunctionComponent = () => {
     </Container>
   );
 };
+
+interface StyleProps {
+  active: boolean
+}
 
 const Container = styled.section`
   width: 100%;
@@ -55,7 +64,7 @@ const ButtonsWrapper = styled.div`
   align-items: center;
 `;
 
-const FilterButton = styled.button`
+const FilterButton = styled.button<StyleProps>`
   border: none;
   outline: none;
   background-color: transparent;
@@ -64,6 +73,20 @@ const FilterButton = styled.button`
   font-weight: bold;
   cursor: pointer;
   position: relative;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 150%;
+    height: 4px;
+    background-color: var(--primary-color);
+    position: absolute;
+    transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: ${({ active }) => (active ? 'scale(1, 1)' : 'scale(1, 0)')};
+    top: 185%;
+    left: -25%;
+    border-radius: 12px 12px 0 0;
+  }
 `;
 
 export default Filter;

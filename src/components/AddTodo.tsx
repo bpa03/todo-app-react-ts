@@ -58,6 +58,10 @@ const Form = styled.form`
   display: grid;
   grid-template-columns: 100%;
   gap: 0.6rem;
+
+  @media only screen and (min-width: 768px) {
+    grid-template-columns: 75% 23%;
+  }
 `;
 
 const Input = styled.input`
