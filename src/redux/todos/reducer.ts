@@ -2,9 +2,7 @@
 import type { TodosAction, TodosState } from './interfaces';
 import TodosActionTypes from './types';
 
-const initialState: TodosState = [
-  { completed: false, id: '1', todo: 'Terminar de maturbarme' },
-];
+const initialState: TodosState = [];
 
 export default function todosReducer(
   state: TodosState = initialState,
