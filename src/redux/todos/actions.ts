@@ -20,3 +20,7 @@ export const deleteTodo = (id: string): TodosAction => ({
   type: TodosActionTypes.DELETE_TODO,
   payload: id,
 });
+
+export const deleteCompletedTodos = (): TodosAction => ({
+  type: TodosActionTypes.DELETE_COMPLETED_TODOS,
+});

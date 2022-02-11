@@ -25,6 +25,10 @@ export default function todosReducer(
       return state.filter((todo) => todo.id !== id);
     }
 
+    case TodosActionTypes.DELETE_COMPLETED_TODOS: {
+      return state.filter((todo) => !todo.completed);
+    }
+
     default: {
       return state;
     }
